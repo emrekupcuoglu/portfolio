@@ -75,7 +75,6 @@ body {
     wave 20s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite,
     swell 20s linear infinite;
 
-  /* animation-direction: alternate; */
   animation-fill-mode: forwards;
 }
 

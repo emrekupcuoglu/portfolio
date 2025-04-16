@@ -10,17 +10,20 @@ import WorkExperience from "./WorkExperience";
 function About() {
   return (
     <div className="bg-slate-700 py-24 text-lg text-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-center gap-36 px-24">
-        <div className="relative aspect-square h-36 self-start rounded-full">
+      {/* <div className="mx-auto flex max-w-7xl justify-center gap-36 px-24"> */}
+      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr] gap-36 px-24">
+        <div className="sticky top-36 aspect-square h-36 rounded-full">
           <Image
             src={profileImg}
-            fill
             alt="profile image"
-            className="rounded-full object-contain"
+            className="aspect-square h-36 rounded-full object-contain"
           />
         </div>
+
         <div>
-          <h1 className="text-7xl">Burak Küpçüoğlu</h1>
+          <h1 id="about" className="text-7xl">
+            Burak Küpçüoğlu
+          </h1>
           <p className="pb-8 text-3xl text-slate-300">Fullstack Engineer</p>
           <div className="flex gap-2 pb-12">
             <Link

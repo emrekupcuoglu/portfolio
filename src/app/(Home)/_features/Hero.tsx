@@ -8,7 +8,7 @@ import * as motion from "motion/react-client";
 
 function Hero({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">
       <div className="relative -z-50 aspect-video w-full">
         <div className="py-36">{children}</div>
         <Image src={sky} className="-z-50" alt="sky" fill />

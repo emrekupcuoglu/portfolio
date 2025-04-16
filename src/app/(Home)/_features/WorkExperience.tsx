@@ -1,7 +1,9 @@
 function WorkExperience() {
   return (
     <>
-      <h2 className="pb-8 text-4xl">Projects</h2>
+      <h2 id="work" className="pb-8 text-4xl">
+        Work Experience
+      </h2>
       <div className="pb-12">
         <WorkName name="VAVACARS" date="Aug 2023 - Jul 2024" />
 

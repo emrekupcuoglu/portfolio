@@ -38,44 +38,48 @@ function Projects() {
       </div>
 
       <div className="pb-12">
-        <ProjectName>The Cozy Cove</ProjectName>
+        <div className="pb-8 pl-16">
+          <ProjectName>The Cozy Cove</ProjectName>
 
-        <ProjectItem
-          bulletPoints={[
-            "A hotel check-in app built with Next.js, Supabase & NextAuth",
-            "Users can browser cabins, filter and book cabins",
-            "User can log-in with Google and see their bookings",
-          ]}
+          <ProjectItem
+            bulletPoints={[
+              "A hotel check-in app built with Next.js, Supabase & NextAuth",
+              "Users can browser cabins, filter and book cabins",
+              "User can log-in with Google and see their bookings",
+            ]}
+          />
+        </div>
+
+        <ProjectImage
+          img={cozyCoveHome}
+          icons={[tsIcon, nextIcon, supabaseIcon, tailwindIcon]}
         />
       </div>
-
-      <ProjectImage
-        img={cozyCoveHome}
-        icons={[tsIcon, nextIcon, supabaseIcon, tailwindIcon]}
-      />
 
       <div className="pb-12">
-        <ProjectName>The Wild Oasis</ProjectName>
+        <div className="pb-8 pl-16">
+          <ProjectName>The Wild Oasis</ProjectName>
 
-        <ProjectItem
-          bulletPoints={[
-            "A hotel dashboard and admin panel for The Cozy Cove built with React & Supabase",
-            "Users can see create, update, and delete cabins",
-            "User can see statistics and charts about the bookings and manage their business based on the data",
+          <ProjectItem
+            bulletPoints={[
+              "A hotel dashboard and admin panel for The Cozy Cove built with React & Supabase",
+              "Users can see create, update, and delete cabins",
+              "User can see statistics and charts about the bookings and manage their business based on the data",
+            ]}
+          />
+        </div>
+
+        <ProjectImage
+          img={wildOasis}
+          icons={[
+            tsIcon,
+            reactIcon,
+            supabaseIcon,
+            rhfIcon,
+            styledComponentsIcons,
           ]}
         />
       </div>
-
-      <ProjectImage
-        img={wildOasis}
-        icons={[
-          tsIcon,
-          reactIcon,
-          supabaseIcon,
-          rhfIcon,
-          styledComponentsIcons,
-        ]}
-      />
     </>
   );
 }
