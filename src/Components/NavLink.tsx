@@ -6,11 +6,17 @@ function NavLink({
   children,
   href,
   className,
+  isActive = false,
+  setActive,
 }: {
   children: React.ReactNode;
   href: string;
   className?: string;
+  isActive: boolean;
+  setActive: (section: string) => void;
 }) {
+  console.log("NavLink", isActive, href);
+
   function onClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
 
@@ -24,13 +30,19 @@ function NavLink({
     }
     console.log("href", href);
     window.history.pushState(null, "", href);
+    setActive(href);
   }
 
   return (
     <a
       onClick={onClick}
       href={href}
-      className={cn("rounded-2xl p-4 hover:bg-gray-600", className)}
+      className={cn(
+        "rounded-2xl p-4",
+        className,
+        isActive && "border border-zinc-500 bg-zinc-700",
+        !isActive && "hover:border hover:border-zinc-500 hover:bg-zinc-800",
+      )}
     >
       {children}
     </a>
