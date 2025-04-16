@@ -9,13 +9,7 @@ import { useEffect, useRef, useState } from "react";
 const START_DELAY = 2000; // Delay before the first word appears
 const DURATION = 5000; // Duration of each word
 
-function HighlightedWord({
-  words,
-  delay,
-}: {
-  words: string[];
-  delay?: number;
-}) {
+function HighlightedWord({ words }: { words: string[] }) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const word = words[currentWordIndex] || "";
 

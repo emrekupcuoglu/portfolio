@@ -1,16 +1,16 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 import nextIcon from "@/../public/next-icon.svg";
-import supabaseIcon from "@/../public/supabase-icon.svg";
-import zodIcon from "@/../public/zod-icon.svg";
-import rhfIcon from "@/../public/rhf-icon.svg";
-import tailwindIcon from "@/../public/tailwind-icon.svg";
 import reactIcon from "@/../public/react-icon.svg";
+import rhfIcon from "@/../public/rhf-icon.svg";
 import styledComponentsIcons from "@/../public/styled-components-icon.svg";
+import supabaseIcon from "@/../public/supabase-icon.svg";
+import tailwindIcon from "@/../public/tailwind-icon.svg";
 import tsIcon from "@/../public/ts-icon.svg";
+import zodIcon from "@/../public/zod-icon.svg";
 
-import cozyNestHome from "@/../public/cozy-nest-home.png";
 import cozyCoveHome from "@/../public/cozy-cove-home.png";
+import cozyNestHome from "@/../public/cozy-nest-home.png";
 import wildOasis from "@/../public/wild-oasis-home.png";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
@@ -116,7 +116,6 @@ function ProjectImage({
   icons: StaticImport[];
 }) {
   return (
-    // <div className="relative aspect-[16/9] w-11/11 rounded-2xl bg-slate-200">
     <div className="rounded-2xl bg-slate-200">
       <Image src={img} alt="Cozy nest home page" />
       <div className="flex justify-center gap-8 px-12">

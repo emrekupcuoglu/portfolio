@@ -1,10 +1,5 @@
-import Image from "next/image";
 import sky from "@/../public/mountain-sky.jpg";
-// import sky from "@/../public/gargantuan-2.jpg";
-// import sky from "@/../public/gargantuan.png";
-
-import * as motion from "motion/react-client";
-// import { motion } from "motion/react";
+import Image from "next/image";
 
 function Hero({ children }: { children: React.ReactNode }) {
   return (
