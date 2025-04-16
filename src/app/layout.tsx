@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Burak Emre Küpçüoğlu" }],
   creator: "Burak Emre Küpçüoğlu",
-  metadataBase: new URL("https://portfolio-seven-smoky-92.vercel.app"),
+  metadataBase: new URL("https://burakemrekupcuoglu.vercel.app/"),
 };
 
 export default function RootLayout({
