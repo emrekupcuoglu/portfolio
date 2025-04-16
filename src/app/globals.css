@@ -26,37 +26,35 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer components {
-  .slide-up {
-    transform: translateY(100px);
+.wave {
+  position: absolute;
+  top: -10rem;
+  left: 0;
+  width: 6400px;
+  height: 10rem;
 
-    animation-name: slide-up fade-out;
-    animation-duration: 0.7s, 0.7s;
-    animation-timing-function: ease-in-out, ease-in-out;
-    animation-fill-mode: forwards, forwards;
-    animation-delay:
-      calc(var(--animation-order) * 100ms), calc(var(--animation-order) * 150ms);
-    /* animation: slide-up 0.7s ease-in-out; */
-    animation-fill-mode: forwards;
-    animation-delay: calc(var(--animation-order) * 100ms);
-
-    /* animation: fade-out 0.7s ease-in-out; */
-    /* animation-fill-mode: forwards; */
-    /* animation-delay: calc(var(--animation-order) * 150ms); */
-  }
-
-  @keyframes slide-up {
-    100% {
-      transform: translateY(0px);
-    }
-  }
-
-  @keyframes fade-out {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
+  background: url(../../public/wave.svg);
+  background-repeat: repeat-x;
+  z-index: 1000000;
 }
+
+.ocean {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6400px;
+  height: 10rem;
+  background-color: rgb(53, 102, 124);
+  z-index: -1;
+}
+
+/* .wave {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
+    repeat-x;
+  position: absolute;
+  top: -198px;
+  width: 6400px;
+  height: 198px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+} */
