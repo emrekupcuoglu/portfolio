@@ -1,10 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect } from "react";
 
 function NavLink({
   children,
@@ -26,6 +22,8 @@ function NavLink({
         behavior: "smooth",
       });
     }
+    console.log("href", href);
+    window.history.pushState(null, "", href);
   }
 
   return (
