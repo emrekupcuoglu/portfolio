@@ -26,6 +26,25 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+
+@keyframes swell {
+  0%,
+  100% {
+    transform: translate3d(0, -10px, 0);
+  }
+  50% {
+    transform: translate3d(0, 1px, 0);
+  }
+}
+
 .wave {
   position: absolute;
   top: -10rem;
@@ -34,8 +53,30 @@ body {
   height: 10rem;
 
   background: url(../../public/wave.svg);
+
   background-repeat: repeat-x;
   z-index: 1000000;
+  animation: wave 20s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave-2 {
+  position: absolute;
+  top: -9rem;
+  left: 0;
+  width: 6400px;
+  height: 15rem;
+
+  background: url(../../public/wave-2.svg);
+
+  background-repeat: repeat-x;
+  z-index: 1000000;
+  animation:
+    wave 20s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite,
+    swell 20s linear infinite;
+
+  /* animation-direction: alternate; */
+  animation-fill-mode: forwards;
 }
 
 .ocean {
@@ -47,14 +88,3 @@ body {
   background-color: rgb(53, 102, 124);
   z-index: -1;
 }
-
-/* .wave {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
-    repeat-x;
-  position: absolute;
-  top: -198px;
-  width: 6400px;
-  height: 198px;
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-  transform: translate3d(0, 0, 0);
-} */
