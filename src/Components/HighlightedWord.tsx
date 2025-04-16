@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 // --- Configuration ---
 
-const START_DELAY = 2000; // Delay before the first word appears
+const START_DELAY = 0; // Delay before the first word appears
 const DURATION = 5000; // Duration of each word
 
 function HighlightedWord({ words }: { words: string[] }) {
@@ -28,9 +28,9 @@ function HighlightedWord({ words }: { words: string[] }) {
   }, [currentWordIndex, words]);
 
   return (
-    <motion.div className="mt-8 skew-3 overflow-hidden text-7xl">
+    <motion.div className="mt-8 skew-3 overflow-hidden text-7xl max-md:text-5xl max-sm:text-3xl">
       <motion.div
-        className="w-96 overflow-hidden bg-pink-400 px-2 text-center"
+        className="w-96 overflow-hidden bg-linear-to-b from-[#8DAA91] to-[#EE6C4D] px-2 text-center max-md:w-48 max-sm:w-36"
         initial={{ translateY: "120%" }}
         animate={{ translateY: ["120%", 0] }}
         transition={{
@@ -46,8 +46,8 @@ function HighlightedWord({ words }: { words: string[] }) {
             repeat: Infinity,
             duration: 5,
             ease: "easeIn",
-            times: [0, 0.1, 0.9, 1],
-            delay: 2,
+            times: [0, 0.05, 0.9, 1],
+            // delay: 2,
           }}
         >
           {word}
