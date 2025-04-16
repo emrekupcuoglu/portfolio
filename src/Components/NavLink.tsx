@@ -17,22 +17,17 @@ function NavLink({
 }) {
   function onClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
-    console.log("href", href);
-    const a = document.querySelector(href)?.scrollIntoView({
-      behavior: "smooth",
-    });
 
-    console.log("a", a);
-    // if (href === "#home") {
-    //   e.preventDefault();
-    //   window.scrollTo({ top: 0, behavior: "smooth" });
-    // }
+    if (href === "#home") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document.querySelector(href)?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   }
-  // useEffect(() => {
-  //   document.getElementById(href)?.scrollIntoView({
-  //     behavior: "smooth",
-  //   });
-  // }, []);
+
   return (
     <a
       onClick={onClick}

@@ -8,29 +8,22 @@ const sentence = "I am a full stack developer, I built websites that are: ";
 
 export default function Home() {
   return (
-    <div>
-      <div className="overflow-hidden">
-        <Hero>
-          <div
-            id="home"
-            className="relative z-50 mx-auto max-w-xl p-12 text-4xl"
-          >
-            <h1 className="blur-none">Hi I am Emre</h1>
+    <>
+      <Hero>
+        <div id="home" className="relative z-50 mx-auto max-w-xl p-12 text-4xl">
+          <h1 className="blur-none">Hi I am Emre</h1>
 
-            <div>
-              <AnimatedSentence sentence={sentence} delay={40} />
+          <div>
+            <AnimatedSentence sentence={sentence} delay={40} />
 
-              <HighlightedWord words={["Unique", "Scalable", "Nice"]} />
-            </div>
-
-            <div className="absolute -top-1/2 left-0 -z-20 aspect-square w-full rounded-full bg-zinc-100/30 blur-3xl"></div>
+            <HighlightedWord words={["Unique", "Scalable", "Nice"]} />
           </div>
-        </Hero>
-      </div>
 
-      <div>
-        <About />
-      </div>
-    </div>
+          <div className="absolute -top-1/2 left-0 -z-20 aspect-square w-full rounded-full bg-zinc-100/30 blur-3xl"></div>
+        </div>
+      </Hero>
+
+      <About />
+    </>
   );
 }
