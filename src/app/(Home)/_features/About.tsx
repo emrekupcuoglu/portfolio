@@ -9,51 +9,68 @@ import Projects from "./Projects";
 import WorkExperience from "./WorkExperience";
 function About() {
   return (
-    <div className="bg-slate-700 py-24 text-lg text-white">
-      {/* <div className="mx-auto flex max-w-7xl justify-center gap-36 px-24"> */}
-      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr] gap-36 px-24">
-        <div className="sticky top-36 aspect-square h-36 rounded-full">
+    <div className="bg-slate-700 px-48 py-24 text-lg text-white max-xl:px-32 max-lg:px-24 max-md:px-0 max-md:py-0">
+      {/* <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr] gap-36 px-24"> */}
+      <div className="mx-auto flex max-w-7xl gap-36 px-8 max-lg:gap-24 max-md:flex-col max-md:items-center max-md:gap-12">
+        <div className="sticky top-36 aspect-square h-36 rounded-full max-md:static max-md:w-fit">
           <Image
             src={profileImg}
             alt="profile image"
-            className="aspect-square h-36 rounded-full object-contain"
+            className="aspect-square h-36 rounded-full object-cover object-top"
           />
         </div>
 
         <div>
-          <h1 id="about" className="text-7xl">
+          <h1
+            id="about"
+            className="pb-2 text-7xl max-md:text-center max-md:text-5xl max-sm:text-3xl"
+          >
             Burak Küpçüoğlu
           </h1>
-          <p className="pb-8 text-3xl text-slate-300">Fullstack Engineer</p>
-          <div className="flex gap-2 pb-12">
+          <p className="pb-8 text-3xl text-slate-300 max-md:text-center max-sm:text-2xl">
+            Fullstack Engineer
+          </p>
+          <div className="flex gap-2 pb-12 max-md:justify-center max-md:gap-4 max-sm:gap-2">
             <Link
               href="https://github.com/emrekupcuoglu/"
-              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1"
+              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1"
             >
               <div className="flex">
-                <Image src={githubLogo} alt="github logo" />
+                <Image
+                  src={githubLogo}
+                  alt="github logo"
+                  className="max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5"
+                />
               </div>
-              <p>Github</p>
+              <p className="max-md:hidden">Github</p>
             </Link>
 
             <Link
               href="https://www.linkedin.com/in/bekupcuoglu/"
-              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1"
+              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1"
             >
               <div className="flex">
-                <Image src={linkedInLogo} alt="linkedIn logo" />
+                <Image
+                  src={linkedInLogo}
+                  alt="linkedIn logo"
+                  className="max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5"
+                />
               </div>
-              <p>LinkedIn</p>
+              <p className="max-md:hidden">LinkedIn</p>
             </Link>
 
             <Link
               href="mailto:emrekupcuoglu@gmail.com"
-              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1"
+              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1"
             >
               <div className="flex">
-                <Image src={emailLogo} alt="email logo" />
+                <Image
+                  src={emailLogo}
+                  alt="email logo"
+                  className="max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5"
+                />
               </div>
-              <p>Email</p>
+              <p className="max-md:hidden">Email</p>
             </Link>
           </div>
 
@@ -65,7 +82,7 @@ function About() {
             discover how I bring projects to life.
           </p>
 
-          <div className="flex flex-col gap-12 pt-12">
+          <div className="flex flex-col gap-8 pt-20 max-md:gap-6">
             <Projects />
             <WorkExperience />
           </div>

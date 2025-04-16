@@ -16,7 +16,8 @@ function Header() {
   }, [setActive]);
 
   return (
-    <header className="fixed top-0 z-50 mx-auto flex w-full justify-center p-6 text-white">
+    <header className="fixed top-0 z-50 mx-auto flex w-full justify-center p-6 text-white max-md:top-auto max-md:bottom-0">
+      {/* <header className="fixed bottom-0 z-50 mx-auto flex w-full justify-center p-6 text-white"> */}
       <nav className="rounded-xl bg-zinc-900 px-2">
         <ul className="flex justify-center gap-1">
           <li className="flex items-center gap-2 p-1 text-2xl font-bold text-white">

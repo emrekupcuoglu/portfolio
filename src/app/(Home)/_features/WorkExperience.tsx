@@ -1,7 +1,7 @@
 function WorkExperience() {
   return (
     <>
-      <h2 id="work" className="pb-8 text-4xl">
+      <h2 id="work" className="pb-8 text-5xl">
         Work Experience
       </h2>
       <div className="pb-12">

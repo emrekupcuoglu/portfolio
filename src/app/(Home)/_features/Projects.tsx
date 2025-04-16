@@ -17,9 +17,9 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 function Projects() {
   return (
     <>
-      <h2 className="pb-8 text-4xl">Projects</h2>
+      <h2 className="text-5xl">Projects</h2>
       <div className="pb-12">
-        <div className="pb-8 pl-16">
+        <div className="pb-8">
           <ProjectName>The Cozy Nest</ProjectName>
 
           <ProjectItem
@@ -38,7 +38,7 @@ function Projects() {
       </div>
 
       <div className="pb-12">
-        <div className="pb-8 pl-16">
+        <div className="pb-8">
           <ProjectName>The Cozy Cove</ProjectName>
 
           <ProjectItem
@@ -57,7 +57,7 @@ function Projects() {
       </div>
 
       <div className="pb-12">
-        <div className="pb-8 pl-16">
+        <div className="pb-8">
           <ProjectName>The Wild Oasis</ProjectName>
 
           <ProjectItem
@@ -118,14 +118,14 @@ function ProjectImage({
   return (
     <div className="rounded-2xl bg-slate-200">
       <Image src={img} alt="Cozy nest home page" />
-      <div className="flex justify-center gap-8 px-12">
+      <div className="flex justify-center gap-8 px-12 max-lg:gap-6 max-md:gap-4">
         {icons.map((icon, index) => {
           return (
             <Image
               key={index}
               src={icon}
               alt=""
-              className="h-12 w-12 -translate-y-4"
+              className="aspect-square w-12 -translate-y-3 max-md:w-12 max-sm:w-6 max-sm:-translate-y-1"
             />
           );
         })}
