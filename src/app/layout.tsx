@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/Components/Header";
+import openGraphImg from "@/../public/open-graph.png";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,23 @@ export const metadata: Metadata = {
   authors: [{ name: "Burak Emre Küpçüoğlu" }],
   creator: "Burak Emre Küpçüoğlu",
   metadataBase: new URL("https://burakemrekupcuoglu.vercel.app/"),
+  openGraph: {
+    title: "Burak Emre Küpçüoğlu | Fullstack Developer Portfolio",
+    description:
+      "Welcome to the portfolio of Burak Emre Küpçüoğlu, a fullstack developer based in Ankara, Turkey. Explore projects, skills, and experience in web development, including work with Next.js, Supabase, Node.js, and more.",
+    url: "https://burakemrekupcuoglu.vercel.app/",
+    images: [
+      {
+        url: openGraphImg.src,
+        secureUrl: openGraphImg.src,
+        width: 1200,
+        height: 630,
+        alt: "Preview image for Burak Emre Küpçüoğlu's Portfolio",
+      },
+    ],
+    type: "website",
+    siteName: "Burak Emre Küpçüoğlu Portfolio",
+  },
 };
 
 export default function RootLayout({
