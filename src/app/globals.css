@@ -77,13 +77,6 @@ body {
 
   animation-fill-mode: forwards;
 }
-
-.ocean {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 6400px;
-  height: 10rem;
-  background-color: rgb(53, 102, 124);
-  z-index: -1;
+.perspective {
+  perspective: 1000px;
 }

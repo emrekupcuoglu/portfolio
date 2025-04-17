@@ -1,4 +1,8 @@
+"use client";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 import nextIcon from "@/../public/next-icon.svg";
 import reactIcon from "@/../public/react-icon.svg";
@@ -12,7 +16,6 @@ import zodIcon from "@/../public/zod-icon.svg";
 import cozyCoveHome from "@/../public/cozy-cove-home.png";
 import cozyNestHome from "@/../public/cozy-nest-home.png";
 import wildOasis from "@/../public/wild-oasis-home.png";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 function Projects() {
   return (
@@ -33,6 +36,9 @@ function Projects() {
 
         <ProjectImage
           img={cozyNestHome}
+          alt="Cozy nest home page"
+          githubLink="https://github.com/emrekupcuoglu/the-cozy-nest"
+          liveLink="https://the-cozy-nest.vercel.app/"
           icons={[tsIcon, nextIcon, supabaseIcon, zodIcon, rhfIcon]}
         />
       </div>
@@ -52,6 +58,9 @@ function Projects() {
 
         <ProjectImage
           img={cozyCoveHome}
+          alt="Cozy cove home page"
+          githubLink="https://github.com/emrekupcuoglu/the-cozy-cove"
+          liveLink="https://the-cozy-cove.vercel.app/"
           icons={[tsIcon, nextIcon, supabaseIcon, tailwindIcon]}
         />
       </div>
@@ -71,6 +80,9 @@ function Projects() {
 
         <ProjectImage
           img={wildOasis}
+          alt="Wild oasis home page"
+          githubLink="https://github.com/emrekupcuoglu/wild-oasis"
+          liveLink="https://wild-oasis-orpin.vercel.app/"
           icons={[
             tsIcon,
             reactIcon,
@@ -110,25 +122,71 @@ function ProjectName({ children }: { children: React.ReactNode }) {
 
 function ProjectImage({
   img,
+  alt,
   icons,
+  githubLink,
+  liveLink,
 }: {
   img: StaticImport;
+  alt: string;
   icons: StaticImport[];
+  githubLink: string;
+  liveLink: string;
 }) {
+  const [flipped, setFlipped] = useState(false);
+
+  const handleToggle = () => {
+    setFlipped((prev) => !prev);
+  };
+
   return (
-    <div className="rounded-2xl bg-slate-200">
-      <Image src={img} alt="Cozy nest home page" />
-      <div className="flex justify-center gap-8 px-12 max-lg:gap-6 max-md:gap-4">
-        {icons.map((icon, index) => {
-          return (
-            <Image
-              key={index}
-              src={icon}
-              alt=""
-              className="aspect-square w-12 -translate-y-3 max-md:w-12 max-sm:w-6 max-sm:-translate-y-1"
-            />
-          );
-        })}
+    <div
+      className="group perspective relative h-[34rem] w-[43rem] cursor-pointer"
+      onClick={handleToggle}
+    >
+      {/* Flip wrapper */}
+      <div
+        className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""} group-hover:[transform:rotateY(180deg)]`}
+      >
+        {/* FRONT */}
+        <div className="absolute h-full w-full overflow-hidden rounded-2xl bg-slate-200 py-4 backface-hidden">
+          <Image
+            src={img}
+            alt={alt}
+            className="h-[30rem] w-full bg-slate-200 object-cover"
+          />
+          <div className="flex -translate-y-5 justify-center gap-8 p-4 py-0">
+            {icons.map((icon, index) => (
+              <Image
+                key={index}
+                src={icon}
+                alt=""
+                className="aspect-square w-12 max-md:w-10 max-sm:w-8"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* BACK */}
+        <div className="absolute flex h-full w-full rotate-y-180 flex-col items-center justify-center gap-8 overflow-hidden rounded-2xl bg-gray-800 p-8 text-white backface-hidden">
+          <p className="text-2xl font-bold">View Project</p>
+          <div className="flex gap-6">
+            <Link
+              href={githubLink}
+              target="_blank"
+              className="rounded border border-white px-6 py-2 transition hover:bg-white hover:text-gray-800"
+            >
+              GitHub
+            </Link>
+            <Link
+              href={liveLink}
+              target="_blank"
+              className="rounded border border-white px-6 py-2 transition hover:bg-white hover:text-gray-800"
+            >
+              Live Site
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
