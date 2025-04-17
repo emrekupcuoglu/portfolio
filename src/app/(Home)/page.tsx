@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Hero>
-        <div id="home" className="relative z-50 mx-auto max-w-xl p-12 text-4xl">
+        <div className="relative z-50 mx-auto max-w-xl p-12 text-4xl">
           <h1 className="text-7xl blur-none max-md:text-5xl max-sm:text-3xl">
             Hi I am Emre
           </h1>

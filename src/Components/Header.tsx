@@ -9,7 +9,7 @@ import NavLink from "./NavLink";
 import { useEffect } from "react";
 
 function Header() {
-  const [active, setActive] = useState("#home");
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     setActive(window.location.hash);
@@ -22,9 +22,9 @@ function Header() {
         <ul className="flex justify-center gap-1">
           <li className="flex items-center gap-2 p-1 text-2xl font-bold text-white">
             <NavLink
-              href="#home"
-              isActive={active === "#home"}
-              setActive={() => setActive("#home")}
+              href="/"
+              isActive={active === ""}
+              setActive={() => setActive("")}
             >
               <span>
                 <Image

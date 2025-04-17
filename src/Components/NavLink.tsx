@@ -15,21 +15,18 @@ function NavLink({
   isActive: boolean;
   setActive: (section: string) => void;
 }) {
-  console.log("NavLink", isActive, href);
-
   function onClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
 
-    if (href === "#home") {
-      e.preventDefault();
+    if (href === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.pushState(null, "", "/");
     } else {
       document.querySelector(href)?.scrollIntoView({
         behavior: "smooth",
       });
+      window.history.pushState(null, "", href);
     }
-    console.log("href", href);
-    window.history.pushState(null, "", href);
     setActive(href);
   }
 
