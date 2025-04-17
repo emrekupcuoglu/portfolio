@@ -4,18 +4,18 @@ import AnimatedSentence from "../../Components/AnimatedSentence";
 import HighlightedWord from "../../Components/HighlightedWord";
 import About from "./_features/About";
 
-const sentence = "I am a full stack developer, I built websites that are:";
+const sentence = "I am a full stack developer, I built websites that are";
 
 export default function Home() {
   return (
     <>
       <Hero>
-        <div className="relative z-50 mx-auto max-w-xl p-12 text-4xl">
-          <h1 className="text-7xl blur-none max-md:text-5xl max-sm:text-3xl">
+        <div className="relative z-50 mx-auto max-w-xl p-12 text-4xl max-md:px-4">
+          <h1 className="text-center text-7xl blur-none max-md:text-5xl max-sm:text-3xl">
             Hi I am Emre
           </h1>
 
-          <div>
+          <div className="text-center">
             <AnimatedSentence sentence={sentence} delay={40} />
 
             <HighlightedWord words={["Unique", "Scalable", "Nice"]} />

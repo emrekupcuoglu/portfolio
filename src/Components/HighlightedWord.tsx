@@ -28,7 +28,7 @@ function HighlightedWord({ words }: { words: string[] }) {
   }, [currentWordIndex, words]);
 
   return (
-    <motion.div className="mt-8 skew-3 overflow-hidden text-7xl max-md:-translate-x-24 max-md:text-5xl max-sm:text-3xl">
+    <motion.div className="mt-8 flex skew-3 justify-center overflow-hidden text-7xl max-md:mt-4 max-md:text-5xl max-sm:text-3xl">
       <motion.div
         className="w-96 overflow-hidden bg-linear-to-b from-[#8DAA91] to-[#EE6C4D] px-2 text-center max-md:w-48 max-sm:w-36"
         initial={{ translateY: "120%" }}
