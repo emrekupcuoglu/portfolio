@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 // --- Configuration ---
 
-const START_DELAY = 0; // Delay before the first word appears
+const START_DELAY = 2000; // Delay before the first word appears
 const DURATION = 5000; // Duration of each word
 
 function HighlightedWord({ words }: { words: string[] }) {
@@ -16,14 +16,14 @@ function HighlightedWord({ words }: { words: string[] }) {
   const wordChangeDelay = useRef<number>(DURATION + START_DELAY);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
     }, wordChangeDelay.current);
 
     wordChangeDelay.current = DURATION;
 
     return () => {
-      clearTimeout(wordChangeDelay.current);
+      clearTimeout(timeoutId);
     };
   }, [currentWordIndex, words]);
 
@@ -40,6 +40,7 @@ function HighlightedWord({ words }: { words: string[] }) {
         }}
       >
         <motion.div
+          key={currentWordIndex}
           initial={{ translateY: "120%" }}
           animate={{ translateY: ["120%", 0, 0, "-120%"] }}
           transition={{
