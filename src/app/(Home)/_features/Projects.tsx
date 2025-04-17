@@ -141,47 +141,47 @@ function ProjectImage({
 
   return (
     <div
-      className="group perspective relative h-[34rem] w-[43rem] cursor-pointer"
+      className="group perspective relative w-full max-w-4xl cursor-pointer"
+      style={{ aspectRatio: "4 / 3" }}
       onClick={handleToggle}
     >
-      {/* Flip wrapper */}
       <div
-        className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${flipped ? "[transform:rotateY(180deg)]" : ""} group-hover:[transform:rotateY(180deg)]`}
+        className={`relative h-full w-full transition-transform duration-700 [transform-style:preserve-3d] ${
+          flipped ? "[transform:rotateY(180deg)]" : ""
+        }`}
       >
         {/* FRONT */}
-        <div className="absolute h-full w-full overflow-hidden rounded-2xl bg-slate-200 py-4 backface-hidden">
-          <Image
-            src={img}
-            alt={alt}
-            className="h-[30rem] w-full bg-slate-200 object-cover"
-          />
-          <div className="flex -translate-y-5 justify-center gap-8 p-4 py-0">
+        <div className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl bg-white backface-hidden">
+          <div className="flex-1">
+            <Image src={img} alt={alt} className="h-full w-full object-cover" />
+          </div>
+          <div className="flex -translate-y-4 items-center justify-center gap-6 p-4 py-0 max-xl:-translate-y-3 max-lg:gap-4 max-md:gap-10 max-sm:-translate-y-2 max-sm:gap-2">
             {icons.map((icon, index) => (
               <Image
                 key={index}
                 src={icon}
                 alt=""
-                className="aspect-square w-12 max-md:w-10 max-sm:w-8"
+                className="aspect-square w-10 max-lg:w-8 max-md:w-12 max-sm:w-8"
               />
             ))}
           </div>
         </div>
 
         {/* BACK */}
-        <div className="absolute flex h-full w-full rotate-y-180 flex-col items-center justify-center gap-8 overflow-hidden rounded-2xl bg-gray-800 p-8 text-white backface-hidden">
-          <p className="text-2xl font-bold">View Project</p>
-          <div className="flex gap-6">
+        <div className="absolute inset-0 flex rotate-y-180 flex-col items-center justify-center gap-8 rounded-2xl bg-gray-800 p-8 text-white backface-hidden">
+          <p className="text-2xl font-bold max-sm:text-xl">View Project</p>
+          <div className="flex gap-4 max-sm:flex-col">
             <Link
               href={githubLink}
               target="_blank"
-              className="rounded border border-white px-6 py-2 transition hover:bg-white hover:text-gray-800"
+              className="rounded border border-white px-5 py-2 transition hover:bg-white hover:text-gray-800 max-sm:text-sm"
             >
               GitHub
             </Link>
             <Link
               href={liveLink}
               target="_blank"
-              className="rounded border border-white px-6 py-2 transition hover:bg-white hover:text-gray-800"
+              className="rounded border border-white px-5 py-2 transition hover:bg-white hover:text-gray-800 max-sm:text-sm"
             >
               Live Site
             </Link>
