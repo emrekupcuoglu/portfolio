@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/Components/Header";
-import openGraphImg from "@/../public/open-graph.png";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,8 +39,8 @@ export const metadata: Metadata = {
     url: "https://burakemrekupcuoglu.vercel.app/",
     images: [
       {
-        url: openGraphImg.src,
-        secureUrl: openGraphImg.src,
+        url: "/open-graph.png",
+        secureUrl: "/open-graph.png",
         width: 1200,
         height: 630,
         alt: "Preview image for Burak Emre Küpçüoğlu's Portfolio",
