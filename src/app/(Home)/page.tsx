@@ -12,7 +12,7 @@ export default function Home() {
       <Hero>
         <div className="relative z-50 mx-auto max-w-xl p-12 text-4xl max-md:px-4">
           <h1 className="text-center text-7xl blur-none max-md:text-5xl max-sm:text-3xl">
-            Hi I am Emre
+            Hi I am Emre!
           </h1>
 
           <div className="text-center">
