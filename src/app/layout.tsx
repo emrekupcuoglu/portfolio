@@ -31,12 +31,12 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Burak Emre Küpçüoğlu" }],
   creator: "Burak Emre Küpçüoğlu",
-  metadataBase: new URL("https://burakemrekupcuoglu.vercel.app/"),
+  metadataBase: new URL("https://emrekupcuoglu.com/"),
   openGraph: {
     title: "Burak Emre Küpçüoğlu | Fullstack Developer Portfolio",
     description:
       "Welcome to the portfolio of Burak Emre Küpçüoğlu, a fullstack developer based in Ankara, Turkey. Explore projects, skills, and experience in web development, including work with Next.js, Supabase, Node.js, and more.",
-    url: "https://burakemrekupcuoglu.vercel.app/",
+    url: "https://emrekupcuoglu.com/",
     images: [
       {
         url: "/open-graph.png",
