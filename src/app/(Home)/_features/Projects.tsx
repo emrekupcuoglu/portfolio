@@ -38,7 +38,7 @@ function Projects() {
           img={cozyNestHome}
           alt="Cozy nest home page"
           githubLink="https://github.com/emrekupcuoglu/the-cozy-nest"
-          liveLink="https://the-cozy-nest.vercel.app/"
+          liveLink="https://the-cozy-nest-eight.vercel.app/"
           icons={[tsIcon, nextIcon, supabaseIcon, zodIcon, rhfIcon]}
         />
       </div>
