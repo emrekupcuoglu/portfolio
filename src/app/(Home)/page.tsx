@@ -18,7 +18,7 @@ export default function Home() {
           <div className="text-center">
             <AnimatedSentence sentence={sentence} delay={40} />
 
-            <HighlightedWord words={["Unique", "Scalable", "Nice"]} />
+            <HighlightedWord words={["Unique", "Scalable", "Beautiful"]} />
           </div>
 
           <div className="absolute -top-1/2 left-0 -z-20 aspect-square w-full rounded-full bg-zinc-100/30 blur-3xl"></div>
