@@ -7,6 +7,9 @@ import emailLogo from "@/../public/email.svg";
 
 import Projects from "./Projects";
 import WorkExperience from "./WorkExperience";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { cn } from "@/lib/utils";
+
 function About() {
   return (
     <div className="bg-slate-700 px-48 py-24 text-lg text-white max-xl:px-32 max-lg:px-24 max-md:px-0 max-md:py-0">
@@ -31,47 +34,9 @@ function About() {
             Fullstack Engineer
           </p>
           <div className="flex gap-2 pb-12 max-md:justify-center max-md:gap-4 max-sm:gap-2">
-            <Link
-              href="https://github.com/emrekupcuoglu/"
-              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1"
-            >
-              <div className="flex">
-                <Image
-                  src={githubLogo}
-                  alt="github logo"
-                  className="max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5"
-                />
-              </div>
-              <p className="max-md:hidden">Github</p>
-            </Link>
-
-            <Link
-              href="https://www.linkedin.com/in/bekupcuoglu/"
-              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1"
-            >
-              <div className="flex">
-                <Image
-                  src={linkedInLogo}
-                  alt="linkedIn logo"
-                  className="max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5"
-                />
-              </div>
-              <p className="max-md:hidden">LinkedIn</p>
-            </Link>
-
-            <Link
-              href="mailto:emrekupcuoglu@gmail.com"
-              className="flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1"
-            >
-              <div className="flex">
-                <Image
-                  src={emailLogo}
-                  alt="email logo"
-                  className="max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5"
-                />
-              </div>
-              <p className="max-md:hidden">Email</p>
-            </Link>
+            <SocialMediaLink name="Github" src={githubLogo} />
+            <SocialMediaLink name="LinkedIn" src={linkedInLogo} />
+            <SocialMediaLink name="Email" src={emailLogo} />
           </div>
 
           <p>
@@ -93,3 +58,29 @@ function About() {
 }
 
 export default About;
+
+function SocialMediaLink({
+  src,
+  name,
+}: {
+  src: string | StaticImport;
+  name: string;
+}) {
+  return (
+    <Link
+      href="https://github.com/emrekupcuoglu/"
+      className={cn(
+        "flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1",
+      )}
+    >
+      <div className="flex">
+        <Image
+          src={src}
+          alt={`${name} logo`}
+          className={cn("max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5")}
+        />
+      </div>
+      <p className={cn("transition-all max-md:hidden")}>{name}</p>
+    </Link>
+  );
+}
