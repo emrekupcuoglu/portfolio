@@ -34,9 +34,21 @@ function About() {
             Fullstack Engineer
           </p>
           <div className="flex gap-2 pb-12 max-md:justify-center max-md:gap-4 max-sm:gap-2">
-            <SocialMediaLink name="Github" src={githubLogo} />
-            <SocialMediaLink name="LinkedIn" src={linkedInLogo} />
-            <SocialMediaLink name="Email" src={emailLogo} />
+            <SocialMediaLink
+              name="Github"
+              src={githubLogo}
+              href="https://github.com/emrekupcuoglu"
+            />
+            <SocialMediaLink
+              name="LinkedIn"
+              src={linkedInLogo}
+              href="https://www.linkedin.com/in/bekupcuoglu/"
+            />
+            <SocialMediaLink
+              name="Email"
+              src={emailLogo}
+              href="mailto:emrekupcuoglu@gmail.com"
+            />
           </div>
 
           <p>
@@ -62,13 +74,15 @@ export default About;
 function SocialMediaLink({
   src,
   name,
+  href,
 }: {
   src: string | StaticImport;
   name: string;
+  href: string;
 }) {
   return (
     <Link
-      href="https://github.com/emrekupcuoglu/"
+      href={href}
       className={cn(
         "flex gap-2 rounded-xl border border-white bg-slate-900 px-3 py-1 max-md:rounded-3xl max-md:p-2 max-sm:p-1",
       )}
