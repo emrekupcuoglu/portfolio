@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 function NavLink({
   children,
@@ -8,32 +9,19 @@ function NavLink({
   className,
   isActive = false,
   setActive,
+  isSamePage = false,
 }: {
   children: React.ReactNode;
   href: string;
   className?: string;
   isActive: boolean;
   setActive: (section: string) => void;
+  isSamePage?: boolean;
 }) {
-  function onClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault();
-
-    if (href === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      window.history.pushState(null, "", "/");
-    } else {
-      document.querySelector(href)?.scrollIntoView({
-        behavior: "smooth",
-      });
-      window.history.pushState(null, "", href);
-    }
-    setActive(href);
-  }
-
   return (
-    <a
-      onClick={onClick}
+    <Link
       href={href}
+      onClick={() => setActive(href)}
       className={cn(
         "rounded-2xl p-4",
         className,
@@ -42,7 +30,7 @@ function NavLink({
       )}
     >
       {children}
-    </a>
+    </Link>
   );
 }
 

@@ -38,28 +38,16 @@ function Header() {
           </li>
           <li className="p-1">
             <NavLink
-              href="#about"
+              href="/blog"
               className="flex items-center gap-2 font-bold text-white"
-              isActive={active === "#about"}
-              setActive={() => setActive("#about")}
-            >
-              <span>
-                <Image src={aboutIcon} alt="" />
-              </span>
-              <span>About</span>
-            </NavLink>
-          </li>
-          <li className="p-1">
-            <NavLink
-              href="#work"
-              className="flex items-center gap-2 font-bold text-white"
-              isActive={active === "#work"}
-              setActive={() => setActive("#work")}
+              isActive={active === "/blog"}
+              setActive={() => setActive("/blog")}
+              isSamePage={false}
             >
               <span>
                 <Image src={workIcon} alt="" />
               </span>
-              <span>Work</span>
+              <span>Blog</span>
             </NavLink>
           </li>
         </ul>
