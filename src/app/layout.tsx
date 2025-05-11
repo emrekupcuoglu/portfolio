@@ -16,11 +16,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Burak Emre Küpçüoğlu | Fullstack Developer Portfolio",
+  title: "Emre Küpçüoğlu | Fullstack Developer Portfolio",
   description:
-    "Welcome to the portfolio of Burak Emre Küpçüoğlu, a fullstack developer based in Ankara, Turkey. Explore projects, skills, and experience in web development, including work with Next.js, Supabase, Node.js, and more.",
+    "Welcome to the portfolio of Emre Küpçüoğlu, a fullstack developer based in Ankara, Turkey. Explore projects, skills, and experience in web development, including work with Next.js, Supabase, Node.js, and more.",
   keywords: [
-    "Burak Emre Küpçüoğlu",
+    "Emre Küpçüoğlu",
     "Fullstack Developer",
     "Web Developer",
     "Next.js",
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     "Backend Developer",
     "Portfolio",
   ],
-  authors: [{ name: "Burak Emre Küpçüoğlu" }],
-  creator: "Burak Emre Küpçüoğlu",
+  authors: [{ name: "Emre Küpçüoğlu" }],
+  creator: "Emre Küpçüoğlu",
   metadataBase: new URL("https://emrekupcuoglu.com/"),
   openGraph: {
-    title: "Burak Emre Küpçüoğlu | Fullstack Developer Portfolio",
+    title: "Emre Küpçüoğlu | Fullstack Developer Portfolio",
     description:
-      "Welcome to the portfolio of Burak Emre Küpçüoğlu, a fullstack developer based in Ankara, Turkey. Explore projects, skills, and experience in web development, including work with Next.js, Supabase, Node.js, and more.",
+      "Welcome to the portfolio of Emre Küpçüoğlu, a fullstack developer based in Ankara, Turkey. Explore projects, skills, and experience in web development, including work with Next.js, Supabase, Node.js, and more.",
     url: "https://emrekupcuoglu.com/",
     images: [
       {
@@ -45,11 +45,11 @@ export const metadata: Metadata = {
         secureUrl: "/open-graph.png",
         width: 1200,
         height: 630,
-        alt: "Preview image for Burak Emre Küpçüoğlu's Portfolio",
+        alt: "Preview image for Emre Küpçüoğlu's Portfolio",
       },
     ],
     type: "website",
-    siteName: "Burak Emre Küpçüoğlu Portfolio",
+    siteName: "Emre Küpçüoğlu Portfolio",
   },
 };
 

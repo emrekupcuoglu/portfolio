@@ -28,7 +28,7 @@ function About() {
             id="about"
             className="pb-2 text-7xl max-md:text-center max-md:text-5xl max-sm:text-3xl"
           >
-            Burak Küpçüoğlu
+            Emre Küpçüoğlu
           </h1>
           <p className="pb-8 text-3xl text-slate-300 max-md:text-center max-sm:text-2xl">
             Fullstack Engineer
