@@ -40,7 +40,7 @@ function About() {
           </div>
 
           <p>
-            I&apos; a passionate creator who transforms complex ideas into
+            I&apos;m a passionate creator who transforms complex ideas into
             stunning, innovative solutions. With a strong blend of creative
             vision and technical know-how, I thrive on turning challenges into
             opportunities. Explore my work to see creativity in action and
