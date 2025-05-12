@@ -1,0 +1,147 @@
+/* post.css - AFTER prefixing */
+
+/* --- Scoped Prism/Line Number Styles --- */
+.blog-post-content pre[class*="language-"] {
+  /* Added prefix */
+  position: relative;
+  padding-left: 3.8em;
+  overflow-x: auto;
+  counter-reset: linenumber;
+  margin-bottom: 4rem;
+}
+
+.blog-post-content
+  pre[class*="language-"]
+  code.code-highlight
+  span.code-line.line-number {
+  /* Added prefix */
+  display: block;
+  position: relative;
+}
+
+.blog-post-content
+  pre[class*="language-"]
+  code.code-highlight
+  span.code-line.line-number::before {
+  /* Added prefix */
+  content: attr(line);
+  position: absolute;
+  left: -3.8em;
+  top: 0;
+  width: 3em;
+  text-align: right;
+  color: #999;
+  background-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: inline-block;
+  padding-right: 0.8em;
+}
+
+/* --- Scoped General Typography Styles --- */
+/* NOTE: This div style might override the body color from globals.css
+   only within the blog content. You might not need it if body style is enough. */
+.blog-post-content div {
+  /* Added prefix */
+  /* color: white; */ /* Consider removing if body color is sufficient */
+}
+
+.blog-post-content h1 {
+  /* Added prefix */
+  font-size: 2.75rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  /* You can merge styles from the .post-title class here if desired,
+     or keep them separate for more specific title styling */
+}
+
+.blog-post-content h2 {
+  /* Added prefix */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  /* You can merge styles from the .post-subtitle class here if desired */
+}
+
+.blog-post-content h3 {
+  /* Added prefix */
+  font-size: 1.75rem;
+  padding-bottom: 1rem;
+  font-weight: bold;
+  /* You can merge styles from the .post-kicker class here if using h3 */
+}
+
+.blog-post-content blockquote {
+  /* Added prefix */
+  position: relative;
+  margin-bottom: 2.5rem;
+  /* Add margin/padding for indentation */
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+  border-left: solid 2px #ccc;
+}
+
+blockquote::before {
+  content: "";
+  font-size: 2rem;
+
+  /* background-color: #ccc; */
+  position: absolute;
+  left: -0.75rem;
+  top: 20%;
+  width: 0.2rem;
+  height: 50%;
+}
+
+.blog-post-content p {
+  /* Added prefix */
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.blog-post-content blockquote p {
+  /* Added prefix */
+  padding-bottom: 0; /* Keep this specific override */
+}
+
+/* Remove the ::before style for blockquote if using border */
+/* .blog-post-content blockquote::before { ... } */
+
+.blog-post-content ol {
+  /* Added prefix */
+  list-style: decimal;
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+  margin-left: 1.5rem; /* Add indentation */
+}
+
+.blog-post-content ul {
+  /* Added prefix */
+  list-style: disc;
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+  margin-left: 1.5rem; /* Add indentation */
+}
+
+.blog-post-content li {
+  /* Added prefix */
+  padding-bottom: 1rem;
+}
+
+/* --- You can also scope your specific kicker/title/subtitle classes
+       if they should ONLY apply within blog posts --- */
+.blog-post-content .post-kicker {
+  /* Your specific kicker styles */
+}
+.blog-post-content .post-title {
+  /* Your specific title styles (if any beyond .blog-post-content h1) */
+}
+.blog-post-content .post-subtitle {
+  /* Your specific subtitle styles (if any beyond .blog-post-content h2) */
+}
+
+.blog-post-content img {
+  padding-bottom: 2rem;
+}
