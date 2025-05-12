@@ -1,12 +1,10 @@
 "use client";
-import aboutIcon from "@/../public/about-icon.svg";
 import homeIcon from "@/../public/home-icon.svg";
 import workIcon from "@/../public/work-icon.svg";
 import Image from "next/image";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
-import { useEffect } from "react";
 
 function Header() {
   const [active, setActive] = useState("");
@@ -42,7 +40,6 @@ function Header() {
               className="flex items-center gap-2 font-bold text-white"
               isActive={active === "/blog"}
               setActive={() => setActive("/blog")}
-              isSamePage={false}
             >
               <span>
                 <Image src={workIcon} alt="" />

@@ -83,18 +83,6 @@
   border-left: solid 2px #ccc;
 }
 
-blockquote::before {
-  content: "";
-  font-size: 2rem;
-
-  /* background-color: #ccc; */
-  position: absolute;
-  left: -0.75rem;
-  top: 20%;
-  width: 0.2rem;
-  height: 50%;
-}
-
 .blog-post-content p {
   /* Added prefix */
   font-size: 1.5rem;

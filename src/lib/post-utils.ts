@@ -14,6 +14,10 @@ type FrontMatter = {
   title: string;
   subtitle: string;
   kicker: string;
+  titleImage: string;
+  titleImageAlt: string;
+  date: string;
+  tags: string[];
 };
 
 export async function getPostData(slug: string) {
@@ -40,7 +44,6 @@ export async function getPostData(slug: string) {
     .use(rehypePrism, { showLineNumbers: true })
     .use(rehypeStringify)
     .process(matterResult.content);
-  console.log("MINIMAL PIPELINE HTML:", processedContent.toString());
 
   const contentHtml = processedContent.toString();
   const matterData = matterResult.data as FrontMatter;
@@ -68,4 +71,12 @@ export async function getAllPosts() {
     };
   });
   return allPostsData;
+}
+
+export async function getAllPostSlugs() {
+  const postsDirectory = path.join(process.cwd(), "src/posts");
+  const fileNames = fs.readdirSync(postsDirectory);
+  return fileNames.map((fileName) => {
+    return fileName.replace(/\.md$/, "");
+  });
 }

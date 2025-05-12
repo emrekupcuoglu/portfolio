@@ -9,14 +9,12 @@ function NavLink({
   className,
   isActive = false,
   setActive,
-  isSamePage = false,
 }: {
   children: React.ReactNode;
   href: string;
   className?: string;
   isActive: boolean;
   setActive: (section: string) => void;
-  isSamePage?: boolean;
 }) {
   return (
     <Link

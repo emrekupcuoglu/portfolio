@@ -3,9 +3,13 @@ kicker: React'i gerçekten anlıyor musunuz?
 title: useState ve useEffect Nasıl Çalışır? React'in İçine Bir Yolculuk!
 subtitle: React'in nasıl çalıştığını gerçekten anlamak istiyorsanız, kendi hook sisteminizi yazmak en iyi yollardan biri. Bu yazıda useState ve useEffect'in perde arkasına birlikte bakıyoruz.
 slug: sifirdan-react-hook-yapimi
+titleImage: react-hooks-title.png
+titleImageAlt: ""
+date: 12 Mayıs 2025
+tags: [react, yazılım, hooks, JavaScript, teknoloji]
 ---
 
-![](/blog/sıfırdan-react-hook-yapımı/react-hooks-title.png)
+![](/blog/sifirdan-react-hook-yapimi/react-hooks-title.png)
 
 > Ya bu useState sihir gibi çalışıyor… Ama nasıl oluyor bu iş?
 
@@ -101,7 +105,7 @@ return [state, setState];
 
 Artık hazırız, useState'i sıfırdan yazdık!
 
-> Not: React setState çalıştırıldığında, React component'ın yeniden render edilmesi gerektiğini anlar ve bu süreci kendisi yönetir. Biz burada React'in iç işleyişini adım adım daha net görebilmek için bu yeniden render adımını manuel yapıyoruz. alkdjawkdljakldajdlk ajdkajdalwkdj awlkdjalkdjawkldajdklawjdal kdjakdjaklakldjawkldjawkldjawlkdjaw awdjawkdjawlkdjaw aw lkdjawkld jawkld jawkld jadkl ajdklajdawkldjawkld jawk djadkl ajd lkajdakl jdawkld jawk
+> Not: React setState çalıştırıldığında, React component'ın yeniden render edilmesi gerektiğini anlar ve bu süreci kendisi yönetir. Biz burada React'in iç işleyişini adım adım daha net görebilmek için bu yeniden render adımını manuel yapıyoruz.
 
 ```javascript
 let App = React.render(Component);
@@ -186,7 +190,7 @@ App = React.render(Component);
 iyice bozulduğunu görün 😬. Merak etmeyin çözümü basit ama gözden kaçması kolay detay.
 Stale Closures
 
-!["stale closures decorative image](/blog/sıfırdan-react-hook-yapımı/react-hooks-stale-closure.png)
+!["stale closures decorative image](/blog/sifirdan-react-hook-yapimi/react-hooks-stale-closure.png)
 
 JavaScript'i ilk öğrenirken sürekli closure'ların çok karışık olduğunu duymuştum, ama örnekleri görünce "millet ne kadar abartıyor ne varki bunda" demiştim. Ve uzun bir süre boyunca da karşıma çıkmadı, bazen farkında olarak bazense farkında olmadan sürekli closure'ları kulanıyordum. Fakat derinlere inince ne kadar karmaşık olabileceğini gördüm. Kodumuzun çalışmamasının nedeni "stale closure". Stale yani bayat, eski. Buradaki çözüm ise aslında biraz ironik gelebilir: setState fonksiyonunun, global index'in ileride alacağı değerlere göre "bayat" kalacak olan, kendi oluşturulduğu andaki index değerini yakalayan bir kapanış (closure) oluşturmasını sağlamaktır.
 Burada index = 0 ataması yapıyoruz, fakat setState her renderdan sonra çalıştırılıyor ve setState çalışana kadar index tekrar 0 oluyor, bunu çözmek için index'i dondurmamız gerek.
@@ -219,7 +223,7 @@ Bununla birlikte useState hazır, sıra useEffect'te
 
 ## useEffect
 
-![](/blog/sıfırdan-react-hook-yapımı/react-hooks-diagram.png)
+![](/blog/sifirdan-react-hook-yapimi/react-hooks-diagram.png)
 
 İşin zor kısmını hallettik, useEffect'in daha zor olacağını düşünüyorsanız yanılıyorsunuz, aslında çok kolay. Tek yapmamız gereken eski bağlı değişkenlerle yenileri karşılaştırmak ve fark varsa eğer callback fonksiyonunu çalıştırmak. Fakat önce useEffect'in mantığına bakalım
 

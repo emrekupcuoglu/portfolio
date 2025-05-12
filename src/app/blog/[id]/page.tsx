@@ -3,7 +3,16 @@ import "prismjs/themes/prism.css"; /* Default theme */
 // import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 
 import "./post.css";
-import { getPostData } from "@/lib/post-utils";
+import { getAllPostSlugs, getPostData } from "@/lib/post-utils";
+
+export async function generateStaticParams() {
+  // This function is used to generate static params for the blog post pages
+  // It will be called at build time to generate the static pages
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({
+    id: slug,
+  }));
+}
 
 export default async function BlogPost({
   params,
@@ -16,9 +25,6 @@ export default async function BlogPost({
 
   const post = await getPostData(slug);
 
-  // console.log("---BEGIN GENERATED HTML---");
-  // console.log(post.contentHtml);
-  // console.log("---END GENERATED HTML---");
   return (
     <div className="min-h-dvh bg-slate-700">
       <div className="mx-auto flex max-w-3xl flex-col gap-8 px-4 py-12">
