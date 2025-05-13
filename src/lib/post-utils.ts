@@ -9,7 +9,7 @@ import remarkRehype from "remark-rehype";
 import rehypePrism from "rehype-prism-plus";
 import rehypeStringify from "rehype-stringify";
 
-type FrontMatter = {
+type FrontMatterType = {
   slug: string;
   title: string;
   subtitle: string;
@@ -18,6 +18,10 @@ type FrontMatter = {
   titleImageAlt: string;
   date: string;
   tags: string[];
+};
+
+export type PostType = FrontMatterType & {
+  id: string;
 };
 
 export async function getPostData(slug: string) {
@@ -46,7 +50,7 @@ export async function getPostData(slug: string) {
     .process(matterResult.content);
 
   const contentHtml = processedContent.toString();
-  const matterData = matterResult.data as FrontMatter;
+  const matterData = matterResult.data as FrontMatterType;
 
   return {
     contentHtml,
@@ -63,7 +67,7 @@ export async function getAllPosts() {
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const matterResult = matter(fileContents);
-    const matterData = matterResult.data as FrontMatter;
+    const matterData = matterResult.data as FrontMatterType;
 
     return {
       id,
