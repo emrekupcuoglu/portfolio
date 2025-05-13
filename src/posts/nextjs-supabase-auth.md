@@ -53,15 +53,16 @@ import { createClient } from "@supabase/supabase-js";
 import { Database } from "./database.types";
 
 if (
-!process.env.NEXT_PUBLIC_SUPABASE_URL ||
-!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 )
-throw new Error("Problem connecting to the database");
+  throw new Error("Problem connecting to the database");
 
 export const supabaseClientAnon = createClient<Database>(
-process.env.NEXT_PUBLIC_SUPABASE_URL,
-process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
+
 ```
 
 _**server.ts:**_ Bu dosya, sunucudaki Supabase client’larımız için. Normalde createServerClientAPI ile RLS’e (Row Level Security) uygun şekilde çalışırız, yani herkes kendi verisini görür, işler tıkırındadır. Ama bazen, özellikle admin tarafında bir şeyler yaparken ya da tüm verilere erişmemiz gereken özel durumlarda, RLS biraz baş ağrıtabilir.
