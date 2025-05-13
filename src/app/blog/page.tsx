@@ -1,6 +1,4 @@
 import { getAllPosts } from "@/lib/post-utils";
-import Image from "next/image";
-import Link from "next/link";
 import Post from "./_components/Post";
 
 export default async function BlogsPage() {
