@@ -156,7 +156,7 @@ function ProjectImage({
             <Image
               src={img}
               alt={alt}
-              className="h-full w-full object-cover transition-all duration-700 hover:scale-105"
+              className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </div>
           <div className="flex -translate-y-4 items-center justify-center gap-6 p-4 py-0 max-xl:-translate-y-3 max-lg:gap-4 max-md:gap-10 max-sm:-translate-y-2 max-sm:gap-2">

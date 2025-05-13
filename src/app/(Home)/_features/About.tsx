@@ -94,7 +94,7 @@ function SocialMediaLink({
           className={cn("max-md:h-8 max-md:w-8 max-sm:h-5 max-sm:w-5")}
         />
       </div>
-      <p className={cn("transition-all max-md:hidden")}>{name}</p>
+      <p className={cn("max-md:hidden")}>{name}</p>
     </Link>
   );
 }
