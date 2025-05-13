@@ -28,9 +28,9 @@ export default async function BlogPost({
   return (
     <div className="min-h-dvh bg-slate-700">
       <div className="mx-auto flex max-w-3xl flex-col gap-8 px-4 py-12">
-        <article className="blog-post-content py-24">
+        <article className="blog-post-content py-24 text-slate-100">
           <h3 className="-mb-2 text-stone-400">{post.kicker}</h3>
-          <h1 className="text-base/tight">{post.title}</h1>
+          <h1 className="text-base/tight text-slate-50">{post.title}</h1>
           <h2 className="-mt-2 text-slate-400"> {post.subtitle}</h2>
           <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
         </article>

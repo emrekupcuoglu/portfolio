@@ -45,7 +45,7 @@
    only within the blog content. You might not need it if body style is enough. */
 .blog-post-content div {
   /* Added prefix */
-  color: white;
+  /* color: white; */
 }
 
 .blog-post-content h1 {
