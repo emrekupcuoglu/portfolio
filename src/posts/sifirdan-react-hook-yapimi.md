@@ -42,12 +42,12 @@ Bu kod beklediğimiz gibi çalışsa her şey çok güzel olurdu fakat closures 
 
 ```javascript
 const useState = (initialVal) => {
-let \_val = initialVal;
-let state = () => \_val;
-const setState = (val) => {
-\_val = val;
-};
-return [state, setState];
+  let _val = initialVal;
+  let state = () => _val;
+  const setState = (val) => {
+    _val = val;
+  };
+  return [state, setState];
 };
 
 const [count, setCount] = useState(0);
@@ -65,14 +65,14 @@ Burada demomuz için kullanacağımız bir React iskeleti oluşturduk, IIFE kull
 
 ```javascript
 const React = (function () {
-let \_val;
+  let _val;
 
-const render = (Component) => {
-const C = Component();
-C.render();
-return C;
-};
-return { useState, render };
+  const render = (Component) => {
+    const C = Component();
+    C.render();
+    return C;
+  };
+  return { useState, render };
 })();
 ```
 
@@ -95,11 +95,11 @@ function Component() {
 
 ```javascript
 const useState = (initialVal) => {
-let state = \_val || initialVal;
-const setState = (val) => {
-\_val = val;
-};
-return [state, setState];
+  let state = _val || initialVal;
+  const setState = (val) => {
+    _val = val;
+  };
+  return [state, setState];
 };
 ```
 
@@ -139,20 +139,23 @@ Yani eğer _hook[0] = count_ ise React bunu her zaman 0. pozisyonda olmasını b
 ```javascript
 const hooks = [];
 let index = 0;
-useState fonksiyonunu güncelleyelim
+```
+
+**useState fonksiyonunu güncelleyelim**
+
+```javascript
 const useState = (initialVal) => {
-let state = hooks[index] || initialVal;
+  let state = hooks[index] || initialVal;
 
-    const setState = (val) => {
-      hooks[index] = val;
-    };
-    index++;
-    return [state, setState];
-
+  const setState = (val) => {
+    hooks[index] = val;
+  };
+  index++;
+  return [state, setState];
 };
 ```
 
-Component fonksiyonu:
+**Component fonksiyonu:**
 
 ```javascript
 function Component() {
@@ -192,7 +195,7 @@ Stale Closures
 
 !["stale closures decorative image](/blog/sifirdan-react-hook-yapimi/react-hooks-stale-closure.png)
 
-JavaScript'i ilk öğrenirken sürekli closure'ların çok karışık olduğunu duymuştum, ama örnekleri görünce "millet ne kadar abartıyor ne varki bunda" demiştim. Ve uzun bir süre boyunca da karşıma çıkmadı, bazen farkında olarak bazense farkında olmadan sürekli closure'ları kulanıyordum. Fakat derinlere inince ne kadar karmaşık olabileceğini gördüm. Kodumuzun çalışmamasının nedeni "stale closure". Stale yani bayat, eski. Buradaki çözüm ise aslında biraz ironik gelebilir: setState fonksiyonunun, global index'in ileride alacağı değerlere göre "bayat" kalacak olan, kendi oluşturulduğu andaki index değerini yakalayan bir kapanış (closure) oluşturmasını sağlamaktır.
+JavaScript'i ilk öğrenirken sürekli closure'ların çok karışık olduğunu duymuştum, ama örnekleri görünce "millet ne kadar abartıyor ne varki bunda" demiştim. Ve uzun bir süre boyunca da karşıma çıkmadı, bazen farkında olarak bazense farkında olmadan sürekli closure'ları kullanıyordum. Fakat derinlere inince ne kadar karmaşık olabileceğini gördüm. Kodumuzun çalışmamasının nedeni "stale closure". Stale yani bayat, eski. Buradaki çözüm ise aslında biraz ironik gelebilir: setState fonksiyonunun, global index'in ileride alacağı değerlere göre "bayat" kalacak olan, kendi oluşturulduğu andaki index değerini yakalayan bir kapanış (closure) oluşturmasını sağlamaktır.
 Burada index = 0 ataması yapıyoruz, fakat setState her renderdan sonra çalıştırılıyor ve setState çalışana kadar index tekrar 0 oluyor, bunu çözmek için index'i dondurmamız gerek.
 
 ```javascript
@@ -204,7 +207,7 @@ const render = (Component) => {
 };
 ```
 
-Neyseki bu çok basit, tek yapmamız gereken index değişkenin bir kopyasını yapmak ve hook pointer olarak onu kullanmak. Bunu yaptığımızda setState global index değişkenin üzerine kapanmak (close over) yerine içindeki "donmuş" \_index değşikenin üzerinde kapanacak, ve beklediğimiz gibi çalışacak.
+Neyseki bu çok basit, tek yapmamız gereken index değişkenin bir kopyasını yapmak ve hook pointer olarak onu kullanmak. Bunu yaptığımızda setState global index değişkenin üzerine kapanmak (close over) yerine içindeki "donmuş" \_index değişkenin üzerinde kapanacak, ve beklediğimiz gibi çalışacak.
 
 ```javascript
 const useState = (initialVal) => {
@@ -234,7 +237,7 @@ useEffect'i yan etkileri yönetmek için kullanıyoruz, yan etkiler React'in ren
 1. Her hangi bir dependency değiştiğinde çalışacak bir callback
 2. Ve izlenecek değişkenler (dependencies)
 
-Aslında useEffect'in dependency array ile yaptığı şey verdiğimiz fonksiyonu, önbelleklemeklemeye benziyor (cache etmek). Fakta bir değeri ya da referansı önbelleklemek yerine, aynı temel prensipleri kullanarak fonksiyonun ne zaman çalışması gerektiğine karar veriyor. Fonksiyonun (cb) gereksiz yere tekrar tekrar çalışmasını engellemek için, girdilerinin (deps) değişip değişmediğini kontrol ederiz. Eğer girdiler aynıysa, sonucu (yani fonksiyonu çalıştırmayı) atlarız.
+Aslında useEffect'in dependency array ile yaptığı şey verdiğimiz fonksiyonu, önbelleklemeye benziyor (cache etmek). Fakta bir değeri ya da referansı önbelleklemek yerine, aynı temel prensipleri kullanarak fonksiyonun ne zaman çalışması gerektiğine karar veriyor. Fonksiyonun (cb) gereksiz yere tekrar tekrar çalışmasını engellemek için, girdilerinin (deps) değişip değişmediğini kontrol ederiz. Eğer girdiler aynıysa, sonucu (yani fonksiyonu çalıştırmayı) atlarız.
 
 Bu mantık, React'teki diğer optimizasyon hook'ları olan useMemo ve useCallback ile de yakından ilişkilidir:
 

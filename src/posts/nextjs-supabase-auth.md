@@ -72,44 +72,44 @@ Ama burası önemli: Bu service_role anahtarı tüm kapıları açar, süper adm
 
 ```javascript
 import {
-createServerClient as createServerClientAPI,
-createBrowserClient as createBrowserClientAPI,
+  createServerClient as createServerClientAPI,
+  createBrowserClient as createBrowserClientAPI,
 } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { Database } from "./database.types";
 
 export async function createServerClient() {
-const cookieStore = await cookies();
+  const cookieStore = await cookies();
 
-return createServerClientAPI<Database>(
-process.env.NEXT_PUBLIC_SUPABASE_URL!,
-process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-{
-cookies: {
-getAll() {
-return cookieStore.getAll();
-},
-setAll(cookiesToSet) {
-try {
-cookiesToSet.forEach(({ name, value, options }) =>
-cookieStore.set(name, value, options),
-);
-} catch {
-// The `setAll` method was called from a Server Component.
-// This can be ignored if you have middleware refreshing
-// user sessions.
-}
-},
-},
-},
-);
+  return createServerClientAPI<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
+          } catch {
+            // The `setAll` method was called from a Server Component.
+            // This can be ignored if you have middleware refreshing
+            // user sessions.
+          }
+        },
+      },
+    },
+  );
 }
 // ! This overrides the Row Level Security (RLS) policy
 export async function createBrowserClient() {
-return createBrowserClientAPI<Database>(
-process.env.NEXT_PUBLIC_SUPABASE_URL!,
-process.env.SUPABASE_KEY!,
-);
+  return createBrowserClientAPI<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_KEY!,
+  );
 }
 ```
 
@@ -120,68 +120,68 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
-let supabaseResponse = NextResponse.next({
-request,
-});
+  let supabaseResponse = NextResponse.next({
+    request,
+  });
 
-const supabase = createServerClient(
-process.env.NEXT_PUBLIC_SUPABASE_URL!,
-process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-{
-cookies: {
-getAll() {
-return request.cookies.getAll();
-},
-setAll(cookiesToSet) {
-cookiesToSet.forEach(({ name, value }) =>
-request.cookies.set(name, value),
-);
-supabaseResponse = NextResponse.next({
-request,
-});
-cookiesToSet.forEach(({ name, value, options }) =>
-supabaseResponse.cookies.set(name, value, options),
-);
-},
-},
-},
-);
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value),
+          );
+          supabaseResponse = NextResponse.next({
+            request,
+          });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options),
+          );
+        },
+      },
+    },
+  );
 
-// Do not run code between createServerClient and
-// supabase.auth.getUser(). A simple mistake could make it very hard to debug
-// issues with users being randomly logged out.
+  // Do not run code between createServerClient and
+  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
+  // issues with users being randomly logged out.
 
-// IMPORTANT: DO NOT REMOVE auth.getUser()
+  // IMPORTANT: DO NOT REMOVE auth.getUser()
 
-const {
-data: { user },
-} = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-if (
-!user &&
-!request.nextUrl.pathname.startsWith("/login") &&
-!request.nextUrl.pathname.startsWith("/signup")
-) {
-// no user, potentially respond by redirecting the user to the login page
-const url = request.nextUrl.clone();
-url.pathname = "/login";
-return NextResponse.redirect(url);
-}
+  if (
+    !user &&
+    !request.nextUrl.pathname.startsWith("/login") &&
+    !request.nextUrl.pathname.startsWith("/signup")
+  ) {
+    // no user, potentially respond by redirecting the user to the login page
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
 
-// IMPORTANT: You _must_ return the supabaseResponse object as it is.
-// If you're creating a new response object with NextResponse.next() make sure to:
-// 1. Pass the request in it, like so:
-// const myNewResponse = NextResponse.next({ request })
-// 2. Copy over the cookies, like so:
-// myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
-// 3. Change the myNewResponse object to fit your needs, but avoid changing
-// the cookies!
-// 4. Finally:
-// return myNewResponse
-// If this is not done, you may be causing the browser and server to go out
-// of sync and terminate the user's session prematurely!
+  // IMPORTANT: You _must_ return the supabaseResponse object as it is.
+  // If you're creating a new response object with NextResponse.next() make sure to:
+  // 1. Pass the request in it, like so:
+  // const myNewResponse = NextResponse.next({ request })
+  // 2. Copy over the cookies, like so:
+  // myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
+  // 3. Change the myNewResponse object to fit your needs, but avoid changing
+  // the cookies!
+  // 4. Finally:
+  // return myNewResponse
+  // If this is not done, you may be causing the browser and server to go out
+  // of sync and terminate the user's session prematurely!
 
-return supabaseResponse;
+  return supabaseResponse;
 }
 ```
 
@@ -191,12 +191,12 @@ _**src/middleware.ts:**_
 import { updateSession } from "@/lib/supabase/middleware";
 import { MiddlewareConfig, type NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
-return await updateSession(request);
+  return await updateSession(request);
 }
 export const config: MiddlewareConfig = {
-matcher: [
-'/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };
 ```
 
@@ -220,10 +220,10 @@ import { loginFormSchema, LoginFormSchema } from "./validation/loginForm";
 import { SignupFormSchema, signupFormSchema } from "./validation/signupForm";
 
 export async function login(inputData: LoginFormSchema) {
-const validatedData = loginFormSchema.safeParse(inputData);
+  const validatedData = loginFormSchema.safeParse(inputData);
 
-if (!validatedData.success) {
-const fieldErrors = validatedData.error.flatten().fieldErrors;
+  if (!validatedData.success) {
+    const fieldErrors = validatedData.error.flatten().fieldErrors;
 
     return {
       error: {
@@ -231,34 +231,33 @@ const fieldErrors = validatedData.error.flatten().fieldErrors;
         password: fieldErrors.password,
       },
     };
+  }
 
-}
+  const supabase = await createServerClient();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: inputData.email,
+    password: inputData.password,
+  });
 
-const supabase = await createServerClient();
-const { data, error } = await supabase.auth.signInWithPassword({
-email: inputData.email,
-password: inputData.password,
-});
+  if (error) {
+    console.error(error.message);
+    throw new Error(error.message);
+  }
 
-if (error) {
-console.error(error.message);
-throw new Error(error.message);
-}
+  redirect("/admin");
 
-redirect("/admin");
-
-return data;
+  return data;
 }
 
 export async function signup(inputData: SignupFormSchema) {
-const validatedUserData = signupFormSchema.safeParse({
-fullName: inputData.fullName,
-email: inputData.email,
-password: inputData.password,
-});
+  const validatedUserData = signupFormSchema.safeParse({
+    fullName: inputData.fullName,
+    email: inputData.email,
+    password: inputData.password,
+  });
 
-if (!validatedUserData.success) {
-const fieldErrors = validatedUserData.error.flatten().fieldErrors;
+  if (!validatedUserData.success) {
+    const fieldErrors = validatedUserData.error.flatten().fieldErrors;
 
     return {
       error: {
@@ -267,43 +266,42 @@ const fieldErrors = validatedUserData.error.flatten().fieldErrors;
         password: fieldErrors.password,
       },
     };
+  }
 
-}
+  const fullName = validatedUserData.data.fullName;
+  const email = validatedUserData.data.email;
+  const password = validatedUserData.data.password;
 
-const fullName = validatedUserData.data.fullName;
-const email = validatedUserData.data.email;
-const password = validatedUserData.data.password;
+  if (!fullName || !email || !password) return;
+  const supabase = await createServerClient();
 
-if (!fullName || !email || !password) return;
-const supabase = await createServerClient();
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { fullName },
+    },
+  });
 
-const { data, error } = await supabase.auth.signUp({
-email,
-password,
-options: {
-data: { fullName },
-},
-});
+  if (error) {
+    console.error(error.message);
+    throw new Error(error.message);
+  }
+  if (data?.user?.role !== "authenticated") redirect("/admin/");
 
-if (error) {
-console.error(error.message);
-throw new Error(error.message);
-}
-if (data?.user?.role !== "authenticated") redirect("/admin/");
-
-return { message: "Success" };
+  return { message: "Success" };
 }
 
 export async function logout() {
-const supabase = await createServerClient();
-const { error } = await supabase.auth.signOut();
+  const supabase = await createServerClient();
+  const { error } = await supabase.auth.signOut();
 
-if (error) {
-console.error(error.message);
-throw new Error(error.message);
-}
+  if (error) {
+    console.error(error.message);
+    throw new Error(error.message);
+  }
 
-redirect("/");
+  redirect("/");
 }
 ```
 
@@ -317,11 +315,11 @@ _**login.tsx:**_
 "use client";
 import { Button } from "@/components/ui/button";
 import {
-Form,
-FormControl,
-FormField,
-FormItem,
-FormLabel,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { login } from "@/lib/action";
@@ -330,54 +328,52 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 function AdminLoginForm() {
-const form = useForm<LoginFormSchema>({
-defaultValues: { email: "", password: "" },
-resolver: zodResolver(loginFormSchema),
-});
-const onSubmit: SubmitHandler<LoginFormSchema> = async (data) => {
-login(data);
-};
+  const form = useForm<LoginFormSchema>({
+    defaultValues: { email: "", password: "" },
+    resolver: zodResolver(loginFormSchema),
+  });
+  const onSubmit: SubmitHandler<LoginFormSchema> = async (data) => {
+    login(data);
+  };
 
-return (
-
-<Form {...form}>
-<form onSubmit={form.handleSubmit(onSubmit)} action="">
-<FormField
-name="email"
-control={form.control}
-rules={{ required: "Email is required" }}
-render={({ field }) => {
-return (
-<FormItem>
-<FormLabel>Email</FormLabel>
-<FormControl>
-<Input placeholder="user@example.com" {...field} />
-</FormControl>
-</FormItem>
-);
-}}
-/>
-<FormField
-name="password"
-control={form.control}
-render={({ field }) => {
-return (
-<FormItem>
-<FormLabel>Password</FormLabel>
-<FormControl>
-<Input placeholder="password" {...field} />
-</FormControl>
-</FormItem>
-);
-}}
-/>
-<Button type="submit">Submit</Button>
-</form>
-</Form>
-);
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} action="">
+        <FormField
+          name="email"
+          control={form.control}
+          rules={{ required: "Email is required" }}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="user@example.com" {...field} />
+                </FormControl>
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          name="password"
+          control={form.control}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="password" {...field} />
+                </FormControl>
+              </FormItem>
+            );
+          }}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  );
 }
 export default AdminLoginForm;
-
 ```
 
 _**signup.tsx:**_
@@ -386,84 +382,83 @@ _**signup.tsx:**_
 "use client";
 import { Button } from "@/components/ui/button";
 import {
-Form,
-FormControl,
-FormField,
-FormItem,
-FormLabel,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
 import { signup } from "@/lib/action";
 import {
-SignupFormSchema,
-signupFormSchema,
+  SignupFormSchema,
+  signupFormSchema,
 } from "@/lib/validation/signupForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 function AdminSignupForm() {
-const form = useForm<SignupFormSchema>({
-resolver: zodResolver(signupFormSchema),
-defaultValues: { email: "", password: "", fullName: "" },
-});
+  const form = useForm<SignupFormSchema>({
+    resolver: zodResolver(signupFormSchema),
+    defaultValues: { email: "", password: "", fullName: "" },
+  });
 
-const onSubmit: SubmitHandler<SignupFormSchema> = async (data) => {
-await signup(data);
-};
+  const onSubmit: SubmitHandler<SignupFormSchema> = async (data) => {
+    await signup(data);
+  };
 
-return (
-
-<Form {...form}>
-<form onSubmit={form.handleSubmit(onSubmit)}>
-<FormField
-name="email"
-control={form.control}
-render={({ field }) => {
-return (
-<FormItem>
-<FormLabel>Email</FormLabel>
-<FormControl>
-<Input placeholder="user@example.com" {...field} />
-</FormControl>
-</FormItem>
-);
-}}
-/>
-<FormField
-name="password"
-control={form.control}
-render={({ field }) => {
-return (
-<FormItem>
-<FormLabel>Password</FormLabel>
-<FormControl>
-<Input placeholder="password" {...field} />
-</FormControl>
-</FormItem>
-);
-}}
-/>
-<FormField
-name="fullName"
-control={form.control}
-render={({ field }) => {
-return (
-<FormItem>
-<FormLabel>Fullname</FormLabel>
-<FormControl>
-<Input placeholder="john smith" {...field} />
-</FormControl>
-</FormItem>
-);
-}}
-/>
-<Button disabled={form.formState.isSubmitting} type="submit">
-Submit
-</Button>
-</form>
-</Form>
-);
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
+          name="email"
+          control={form.control}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="user@example.com" {...field} />
+                </FormControl>
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          name="password"
+          control={form.control}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input placeholder="password" {...field} />
+                </FormControl>
+              </FormItem>
+            );
+          }}
+        />
+        <FormField
+          name="fullName"
+          control={form.control}
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Fullname</FormLabel>
+                <FormControl>
+                  <Input placeholder="john smith" {...field} />
+                </FormControl>
+              </FormItem>
+            );
+          }}
+        />
+        <Button disabled={form.formState.isSubmitting} type="submit">
+          Submit
+        </Button>
+      </form>
+    </Form>
+  );
 }
 export default AdminSignupForm;
 ```
