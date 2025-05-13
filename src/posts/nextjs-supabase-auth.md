@@ -28,7 +28,7 @@ Supabase kayıt olduktan sonra “new project” tuşuna tıkayın, gerekli alan
 
 ![](/blog/nextjs-supabase-auth/new-project-screen.png)
 
-Daha sonra, settings/ Data API bölümüne gidin, buradaki URL ve API anahtarlarını .env.local dosyanıza ekleyin. Özellikle SUPABASE*KEY (service_role anahtarı) gibi hassas anahtarların asla tarayıcıya sızmaması gerektiğini unutmayın. Next.js, yalnızca NEXT_PUBLIC* önekiyle başlayan ortam değişkenlerini (.env variables) tarayıcıya gönderir, bu yüzden SUPABASE_KEY gibi anahtarlar sunucu tarafında güvende kalır. Yine de API anahtarlarınızı yönetirken her zaman dikkatli olun.
+Daha sonra, settings/ Data API bölümüne gidin, buradaki URL ve API anahtarlarını .env.local dosyanıza ekleyin. Özellikle SUPABASE_KEY (service_role anahtarı) gibi hassas anahtarların asla tarayıcıya sızmaması gerektiğini unutmayın. Next.js, yalnızca NEXT_PUBLIC\_ önekiyle başlayan ortam değişkenlerini (.env variables) tarayıcıya gönderir, bu yüzden SUPABASE_KEY gibi anahtarlar sunucu tarafında güvende kalır. Yine de API anahtarlarınızı yönetirken her zaman dikkatli olun.
 
 ```javascript
 NEXT_PUBLIC_SUPABASE_URL = "project url";
@@ -62,7 +62,6 @@ export const supabaseClientAnon = createClient<Database>(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 );
-
 ```
 
 _**server.ts:**_ Bu dosya, sunucudaki Supabase client’larımız için. Normalde createServerClientAPI ile RLS’e (Row Level Security) uygun şekilde çalışırız, yani herkes kendi verisini görür, işler tıkırındadır. Ama bazen, özellikle admin tarafında bir şeyler yaparken ya da tüm verilere erişmemiz gereken özel durumlarda, RLS biraz baş ağrıtabilir.
@@ -203,7 +202,7 @@ export const config: MiddlewareConfig = {
 
 Artık auth kısmına geçebiliriz ama ondan önce ufak bir not:
 
-Supabase fonksiyonlarınızı oluştururken 2 farklı dosya oluşturun, sunucuda çalışacak fonksiyonları bir dosyaya, browser üzerinde çalışacakları diğer tarafa ekleyin. Diğer türlü hata alacaksınız, çünkü NEXT_PUBLIC ile işaretlenmeyen .env değişkenleri browser’a gönderilmeyeceği için runtime hatasına neden olacak.
+Supabase fonksiyonlarınızı oluştururken 2 farklı dosya oluşturun, sunucuda çalışacak fonksiyonları bir dosyaya, browser üzerinde çalışacakları diğer tarafa ekleyin. Diğer türlü hata alacaksınız, çünkü NEXT_PUBLIC\_ ile işaretlenmeyen .env değişkenleri browser’a gönderilmeyeceği için runtime hatasına neden olacak.
 
 **Projeyi kurduk, çevre değişkenlerini ayarladık şimdi işin heyecanlı kısmına geliyoruz: kullanıcı auth sistemi!**
 
@@ -245,7 +244,7 @@ export async function login(inputData: LoginFormSchema) {
     throw new Error(error.message);
   }
 
-  redirect("/admin");
+  redirect("/");
 
   return data;
 }
@@ -464,7 +463,7 @@ function AdminSignupForm() {
 export default AdminSignupForm;
 ```
 
-Evet, artık çalışan bir auth akışınız var. Şimdi çok önemli bir konuya değinelim: sayfa koruması için **yalnızca Next.js middleware’ine güvenmek yeterli değil.** Yakın zamanda ortaya çıkan [CVE-2025–29927](https://nvd.nist.gov/vuln/detail/CVE-2025-29927) açığı, bu yaklaşımın risklerini net bir şekilde gösterdi. Sadece middleware’e bel bağlamak, ciddi güvenlik açıklarına neden olabilir. Bu yüzden, asıl yetkilendirme işlemini her zaman sunucu tarafında yapmalıyız. Browser üzerinde de yetki kontrolü yapabilirsiniz ama buna kritik işler için güvenmeyin,** asıl güvenilir yetki kontrolü her zaman sunucuda yapılmalı.** İşte sunucuda kullanacağımız kod:
+Evet, artık çalışan bir auth akışınız var. Şimdi çok önemli bir konuya değinelim: sayfa koruması için **yalnızca Next.js middleware’ine güvenmek yeterli değil.** Yakın zamanda ortaya çıkan [CVE-2025–29927](https://nvd.nist.gov/vuln/detail/CVE-2025-29927) açığı, bu yaklaşımın risklerini net bir şekilde gösterdi. Sadece middleware’e bel bağlamak, ciddi güvenlik açıklarına neden olabilir. Bu yüzden, asıl yetkilendirme işlemini her zaman sunucu tarafında yapmalıyız. Browser üzerinde de yetki kontrolü yapabilirsiniz ama buna kritik işler için güvenmeyin, **asıl güvenilir yetki kontrolü her zaman sunucuda yapılmalı.** İşte sunucuda kullanacağımız kod:
 
 ```javascript
 export async function getCurrentUserServer() {
@@ -498,8 +497,8 @@ import { redirect } from "next/navigation";
 
 async function Admin() {
   const userData = await getCurrentUserServer();
-  if (!userData) redirect("/admin/auth/login");
-  if (!userData.isAuthenticated) redirect("/admin/auth/login");
+  if (!userData) redirect("/login");
+  if (!userData.isAuthenticated) redirect("/login");
 
   return (
     <div>
